@@ -1,0 +1,61 @@
+device: 'cuda'
+seed: 76923
+model:
+  sigma_begin: 20
+  sigma_end: 0.01
+  num_classes: 8 # Number of noise levels
+  activation: 'softplus'
+  hidden_dim: 128
+data:
+  weights_true:
+    - 0.80
+    - 0.20
+  mu_true:
+    - [5, 5]
+    - [-5, -5]
+  cov_true:
+    - [[1, 0], [0, 1]]
+    - [[1, 0], [0, 1]]
+  n_train_samples: 100000 # Number of training samples
+  n_test_samples: 1280 # Number of generated samples
+  num_workers: 0 # Number of workers for data loading
+training:
+  train: false # If true, train the model; if false, load the pre-trained model
+  batch_size: 128
+  n_epochs: 60
+  model_load_path: 'model_weights/scorenet_20_0.01_8.pth' # If not null, load the model from the specified path
+  log_freq: 100
+sampling:
+  n_steps_each: 150
+  n_frames_each: 30  # Number of selected frames at each noise level, where metrics would be calculated
+  step_lr: 0.000008
+  k_p: 1.0
+  k_i: 0.0
+  k_d: 0.0
+  k_i_window_size: 150
+  k_i_decay: 1.00
+  k_d_decay: 1.00
+  verbose: true
+  log_freq: 1
+optim:
+  optimizer: 'adam'
+  lr: 0.0001
+  beta1: 0.9
+  beta2: 0.999
+  eps: 0.00000001 # 1e-8
+  weight_decay: 0.000
+visualization:
+  figsize: [12, 12]
+  trajectory_start_point:
+    - [1, 1] # Starting point of the trajectory. Effective when args.saving.save_trajectory is true
+saving:
+  result_dir: 'results'
+  experiment_dir_suffix: '' # A suffix to quickly identify the experiment
+  experiment_name: 'default'
+  comment: ''
+  save_model: true
+  save_sample: true
+  save_figure: true
+  save_animation: false
+  save_generation_metric_plot: true
+  save_sampler_record_plot: true

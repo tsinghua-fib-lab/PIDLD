@@ -1,0 +1,39 @@
+device: 'cuda'
+seed: 42
+model:
+  sigma_begin: 20
+  sigma_end: 0.01
+  num_classes: 8 # Number of noise levels
+  activation: 'softplus'
+  hidden_dim: 128
+data:
+  weights_true:
+    - 0.80
+    - 0.20
+  mu_true:
+    - [5, 5]
+    - [-5, -5]
+  cov_true:
+    - [[1, 0], [0, 1]]
+    - [[1, 0], [0, 1]]
+  n_train_samples: 100000 # Number of training samples
+  n_test_samples: 1280 # Number of generated samples
+  num_workers: 0 # Number of workers for data loading
+training:
+  model_load_path: 'model_weights/scorenet_20_0.01_8.pth'
+sampling:
+  n_steps_each: 150 # Number of sampling steps within each noise level
+  n_frames_each: 30 # Number of selected frames at each noise level, where metrics would be calculated and recorded
+  step_lr: 0.000008
+  k_p: 1.0
+  k_i: 0.0
+  k_d: 0.0
+  k_i_window_size: 150
+  k_i_decay: 1.00
+  k_d_decay: 1.00
+  verbose: true
+saving:
+  result_dir: 'results'
+  experiment_dir_suffix: '' # A suffix to quickly identify the experiment
+  experiment_name: 'default'
+  comment: ''

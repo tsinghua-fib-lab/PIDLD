@@ -1,0 +1,47 @@
+data:
+  dataset: "CIFAR10"
+  image_size: 32
+  channels: 3
+
+model:
+  ngf: 128 # number of generator filters (dimension of the latent space of neural network)
+  sigma_begin: 50
+  num_classes: 232 # number of noise levels
+  ema: true
+  ema_rate: 0.999
+  spec_norm: false
+  sigma_end: 0.01
+  score_model_state_dict_path: "model_weights/cifar10/best_checkpoint_with_denoising.pth"
+
+sampling:
+  batch_size: 128 # batch size for forward pass of score network
+  step_lr: 0.0000062
+  n_steps_each: 5
+  denoise: true
+  n_samples: 10000 # number of sampled images
+  k_p: 1.0
+  k_i: 0.0
+  k_d: 0.0
+  k_i_decay: 1.0
+  k_d_decay: 1.0
+  save: true # whether to save the image samples
+  last_only: true # whether to save only the last samples
+  freq: 100
+  verbose: true
+
+evaluation:
+  inception_stats_path: "model_weights/cifar10/fid_stats_cifar10_train.npz"
+  batch_size: 64 # batch size for forward pass of inception network
+  num_workers: 0 # number of workers for data loading in image transformation before inception network
+  freq: 50
+  evaluate: true # whether to turn on evaluation
+  last_only: true # whether to evaluate only the last samples
+  freq: 100
+  verbose: true
+
+visualization:
+  save: true # whether to save the image grids
+  last_only: false # whether to visualize only the last samples
+  freq: 5
+  nrow: 8 # number of images in a row of each image grid
+  verbose: true
