@@ -2,7 +2,7 @@
 
 This is the official implementation of the paper "PID-controlled Langevin Dynamics for Faster Sampling of Generative Models". Each directory corresponds to a task. Please refer to the `README.md` file in each directory for more implementation details.
 
-[Paper](https://openreview.net/forum?id=y9LHDCKeeN) · [NeurIPS](https://neurips.cc/virtual/2025/loc/san-diego/poster/115179) · [Code](https://github.com/tsinghua-fib-lab/PIDLD)
+[Paper](https://openreview.net/forum?id=y9LHDCKeeN) · [NeurIPS](https://neurips.cc/virtual/2025/loc/san-diego/poster/115179) · [Code](https://github.com/tsinghua-fib-lab/PIDLD) · [WebPage](https://tsinghua-fib-lab.github.io/PIDLD/)
 
 
 ## 🔍 Highlights
@@ -55,7 +55,7 @@ We evaluate PIDLD against standard Langevin-based samplers (vanilla ALD and MILD
 
 - **Toy experiments**
   - Purpose: validate the roles of P/I/D terms on simple multimodal landscapes.
-  - Findings: both I and D terms accelerate convergence and reduce KL/divergence; in particular, D term improves stability, and I reduces steady-state bias.
+  - Findings: both I and D terms accelerate convergence and reduce KL/divergence; in particular, D term improves stability, and I term reduces steady-state bias.
 
 - **Image generation (CIFAR10, CelebA)**
   - Setup: apply PIDLD as a plug‑in to pretrained score-based models (NCSNv2) and energy models (IGEBM), vary NFE and tune PID gains (with decaying k_i); compute FID on 10k samples.
