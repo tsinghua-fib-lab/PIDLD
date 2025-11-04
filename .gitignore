@@ -8,3 +8,5 @@ others/
 *.jpg
 *.csv
 *.xlsx
+!fig/
+!fig/**

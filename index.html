@@ -1,177 +1,188 @@
-<style>
-/* Basic styles */
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0 auto;
-    max-width: 900px;
-    padding: 20px;
-    background-color: rgb(240,240,240);
-    color: black;
-}
-h1 {
-    font-size: 2.5em;
-    color: rgb(32,32,128);
-    text-align: center;
-    margin-bottom: 20px;
-}
-h2 {
-    font-size: 1.8em;
-    color: rgb(64,64,96);
-    margin-top: 40px;
-    margin-bottom: 30px;
-    border-bottom: 2px solid rgb(64,128,216);
-    padding-bottom: 5px;
-}
-h3 {
-    font-size: 1.4em;
-    color: rgb(64,64,96);
-    margin-top: 30px;
-    margin-bottom: 20px;
-}
-p {
-    font-size: 1.0em;
-    margin: 10px 0;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIDLD Website</title>
+  <style>
+        /* Basic styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 900px;
+            padding: 20px;
+            background-color: rgb(240,240,240);
+            color: black;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: rgb(32,32,128);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 1.8em;
+            color: rgb(64,64,96);
+            margin-top: 40px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgb(64,128,216);
+            padding-bottom: 5px;
+        }
+        h3 {
+            font-size: 1.4em;
+            color: rgb(64,64,96);
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.0em;
+            margin: 10px 0;
+        }
+        
+        /* Grid styles */
+        .grid-two-column {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-row-gap: 12px;
+            grid-column-gap: 12px;
+            margin: auto;
+        }
+        .grid-one-column {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        .grid-one-row {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        /* Link styles */
+        a {
+            color: rgb(64, 128, 216);
+            text-decoration: none;
+        }
+        a:hover {
+            color: rgb(216, 128, 216);
+            text-decoration: none;
+        }
+        .button-link {
+            background-color: rgb(240,240,240);
+            text-decoration: none;
+            border: 1px solid black;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .button-link:hover {
+            background-color: rgb(232,232,232);
+        }
+        
+        /* Image styles */
+        img {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          margin: 0 auto;
+        }
+        .icon {
+            height: 20px;
+            width: 20px;
+            margin-right:
+            10px;
+            object-fit: contain;
+        }
+        .figure-container {
+            background: rgb(255,255,255);
+            border: 1px solid black;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .figure-text {
+            font-size: 1.0em;
+            color: black;
+            margin-top: 12px;
+        }
+        
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+        }
+        table th, table td {
+            border: 1px solid black;
+            text-align: center;
+        }
+        
+        /* Algorithm styles */
+        .algorithm {
+            margin-top: 1em;
+            border: 2px solid black;
+            padding: 1em;
+        }
+        .line-numbered {
+            display: flex;
+            margin-bottom: 0.5em;
+        }
+        .line-number {
+            width: 3em;
+            text-align: right;
+            padding-right: 1em;
+            color: gray;
+        }
+        .line-content {
+            flex: 1;
+        }
+        .indent-1 { margin-left: 2em; }
+        .indent-2 { margin-left: 4em; }
+        .indent-3 { margin-left: 6em; }
+        .math {
+            margin: 0.5em 0;
+        }
+        
+        /* Citation styles */
+        .citation-box {
+            background: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 20px;
+            font-family: 'SFMono-Regular', 'Monaco', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #24292f;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+        }
+    });
+  </script>
+    
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.2/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
 
-/* Grid styles */
-.grid-two-column {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-row-gap: 12px;
-    grid-column-gap: 12px;
-    margin: auto;
-}
-.grid-one-column {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-}
-.grid-one-row {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-}
-
-/* Link styles */
-a {
-    color: rgb(64, 128, 216);
-    text-decoration: none;
-}
-a:hover {
-    color: rgb(216, 128, 216);
-    text-decoration: none;
-}
-.button-link {
-    background-color: rgb(240,240,240);
-    text-decoration: none;
-    border: 1px solid black;
-    padding: 8px 16px;
-    border-radius: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.button-link:hover {
-    background-color: rgb(232,232,232);
-}
-
-/* Image styles */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-.icon {
-    height: 20px;
-    width: 20px;
-    margin-right:
-    10px;
-    object-fit: contain;
-}
-.figure-container {
-    background: rgb(255,255,255);
-    border: 1px solid black;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    text-align: center;
-}
-.figure-text {
-    font-size: 1.0em;
-    color: black;
-    margin-top: 12px;
-}
-
-/* Table styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 24px;
-}
-table th, table td {
-    border: 1px solid black;
-    text-align: center;
-}
-
-/* Algorithm styles */
-.algorithm {
-    margin-top: 1em;
-    border: 2px solid black;
-    padding: 1em;
-}
-.line-numbered {
-    display: flex;
-    margin-bottom: 0.5em;
-}
-.line-number {
-    width: 3em;
-    text-align: right;
-    padding-right: 1em;
-    color: gray;
-}
-.line-content {
-    flex: 1;
-}
-.indent-1 { margin-left: 2em; }
-.indent-2 { margin-left: 4em; }
-.indent-3 { margin-left: 6em; }
-.math {
-    margin: 0.5em 0;
-}
-
-/* Citation styles */
-.citation-box {
-    background: #f6f8fa;
-    border: 1px solid #d0d7de;
-    border-radius: 6px;
-    padding: 20px;
-    font-family: 'SFMono-Regular', 'Monaco', 'Consolas', monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #24292f;
-    overflow-x: auto;
-    white-space: pre-wrap;
-}
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-      tex2jax: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']],
-          displayMath: [['$$', '$$'], ['\\[', '\\]']],
-          processEscapes: true
-      }
-  });
-</script>
-
+<body>
 
 
 <h1>PID-controlled Langevin Dynamics for Faster Sampling of Generative Models</h1>
@@ -198,9 +209,6 @@ table th, table td {
   <a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/115179" class="button-link"><img src="https://neurips.cc/static/core/img/neurips-logo-new.svg" alt="NeurIPS" class="icon">NeurIPS</a>
   <a href="https://github.com/tsinghua-fib-lab/PIDLD" class="button-link"><i class="fab fa-github" style="margin-right: 10px;"></i>Code</a>
 </div>
-
-<p>This is the official implementation of the paper "PID-controlled Langevin Dynamics for Faster Sampling of Generative Models". Each directory corresponds to a task. Please refer to the `README.md` file in each directory for more implementation details.</p>
-
 
 <div class="figure-container">
   <img src="fig/intro_4.jpg">
@@ -531,3 +539,6 @@ table th, table td {
   url={https://openreview.net/forum?id=y9LHDCKeeN}
 }
 </div>
+
+</body>
+</html>
