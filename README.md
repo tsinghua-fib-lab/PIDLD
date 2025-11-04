@@ -2,10 +2,7 @@
 
 This is the official implementation of the paper "PID-controlled Langevin Dynamics for Faster Sampling of Generative Models". Each directory corresponds to a task. Please refer to the `README.md` file in each directory for more implementation details.
 
-Links:
-- [Paper](https://openreview.net/forum?id=y9LHDCKeeN)
-- [NeurIPS](https://neurips.cc/virtual/2025/loc/san-diego/poster/115179)
-- [Code](https://github.com/tsinghua-fib-lab/PIDLD)
+[Paper](https://openreview.net/forum?id=y9LHDCKeeN) · [NeurIPS](https://neurips.cc/virtual/2025/loc/san-diego/poster/115179) · [Code](https://github.com/tsinghua-fib-lab/PIDLD)
 
 
 ## 🔍 Highlights
@@ -24,12 +21,14 @@ Links:
 ## ⚙️ Algorithm Workflow
 
 The PID-controlled Langevin dynamics update is given by
+
 $$\begin{aligned}
 x_{t+1}=x_t+&\epsilon\Big(\\
 &k_p\nabla_{x}U_\theta(x_t)\\
 +&k_i\cdot\frac{1}{t}\sum_{s=0}^{t}\nabla_{x}U_\theta(x_s)\\
 +&k_d(\nabla_{x}U_\theta(x_t)-\nabla_xU_\theta(x_{t-1}))\\
 &\Big)+\sqrt{2\epsilon}\,\xi_t,\end{aligned}$$
+
 where $k_p,k_i,k_d$ are the proportional, integral, and derivative gains, $U_{\theta}(\cdot)$ is the energy function, $\epsilon$ is the learning rate, and $\xi_t\sim\mathcal{N}(0,I)$.
 
 **PIDLD Algorithm Flowchart**
@@ -81,6 +80,6 @@ If you find the idea useful for your research, please consider citing:
   author={Hongyi Chen and Jianhai Shu and Jingtao Ding and Yong Li and Xiao-Ping Zhang},
   booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems},
   year={2025},
-  url={https://openreview.net/forum?id=y9LHDCKeeN}
+  url={https://openreview.net/forum?id=y9LHDCKeeN},
 }
 ```
