@@ -24,10 +24,10 @@ The PID-controlled Langevin dynamics update is given by
 
 $$\begin{aligned}
 x_{t+1}=x_t+&\epsilon\Big(\\
-&k_p\nabla_{x}U_\theta(x_t)\\
-+&k_i\cdot\frac{1}{t}\sum_{s=0}^{t}\nabla_{x}U_\theta(x_s)\\
-+&k_d(\nabla_{x}U_\theta(x_t)-\nabla_xU_\theta(x_{t-1}))\\
-&\Big)+\sqrt{2\epsilon}\,\xi_t,\end{aligned}$$
+&\quad\ k_p\nabla_{x}U_\theta(x_t)\\
+&+k_i\cdot\frac{1}{t}\sum_{s=0}^{t}\nabla_{x}U_\theta(x_s)\\
+&+k_d(\nabla_{x}U_\theta(x_t)-\nabla_xU_\theta(x_{t-1}))\\
+&\Big)+\sqrt{2\epsilon}\xi_t,\end{aligned}$$
 
 where $k_p,k_i,k_d$ are the proportional, integral, and derivative gains, $U_{\theta}(\cdot)$ is the energy function, $\epsilon$ is the learning rate, and $\xi_t\sim\mathcal{N}(0,I)$.
 
