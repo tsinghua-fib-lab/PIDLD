@@ -1,533 +1,86 @@
-<style>
-/* Basic styles */
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0 auto;
-    max-width: 900px;
-    padding: 20px;
-    background-color: rgb(240,240,240);
-    color: black;
-}
-h1 {
-    font-size: 2.5em;
-    color: rgb(32,32,128);
-    text-align: center;
-    margin-bottom: 20px;
-}
-h2 {
-    font-size: 1.8em;
-    color: rgb(64,64,96);
-    margin-top: 40px;
-    margin-bottom: 30px;
-    border-bottom: 2px solid rgb(64,128,216);
-    padding-bottom: 5px;
-}
-h3 {
-    font-size: 1.4em;
-    color: rgb(64,64,96);
-    margin-top: 30px;
-    margin-bottom: 20px;
-}
-p {
-    font-size: 1.0em;
-    margin: 10px 0;
-}
+# PID-controlled Langevin Dynamics for Faster Sampling of Generative Models
 
-/* Grid styles */
-.grid-two-column {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-row-gap: 12px;
-    grid-column-gap: 12px;
-    margin: auto;
-}
-.grid-one-column {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-}
-.grid-one-row {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-}
+This is the official implementation of the paper "PID-controlled Langevin Dynamics for Faster Sampling of Generative Models". Each directory corresponds to a task. Please refer to the `README.md` file in each directory for more implementation details.
 
-/* Link styles */
-a {
-    color: rgb(64, 128, 216);
-    text-decoration: none;
-}
-a:hover {
-    color: rgb(216, 128, 216);
-    text-decoration: none;
-}
-.button-link {
-    background-color: rgb(240,240,240);
-    text-decoration: none;
-    border: 1px solid black;
-    padding: 8px 16px;
-    border-radius: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.button-link:hover {
-    background-color: rgb(232,232,232);
-}
-
-/* Image styles */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-.icon {
-    height: 20px;
-    width: 20px;
-    margin-right:
-    10px;
-    object-fit: contain;
-}
-.figure-container {
-    background: rgb(255,255,255);
-    border: 1px solid black;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    text-align: center;
-}
-.figure-text {
-    font-size: 1.0em;
-    color: black;
-    margin-top: 12px;
-}
-
-/* Table styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 24px;
-}
-table th, table td {
-    border: 1px solid black;
-    text-align: center;
-}
-
-/* Algorithm styles */
-.algorithm {
-    margin-top: 1em;
-    border: 2px solid black;
-    padding: 1em;
-}
-.line-numbered {
-    display: flex;
-    margin-bottom: 0.5em;
-}
-.line-number {
-    width: 3em;
-    text-align: right;
-    padding-right: 1em;
-    color: gray;
-}
-.line-content {
-    flex: 1;
-}
-.indent-1 { margin-left: 2em; }
-.indent-2 { margin-left: 4em; }
-.indent-3 { margin-left: 6em; }
-.math {
-    margin: 0.5em 0;
-}
-
-/* Citation styles */
-.citation-box {
-    background: #f6f8fa;
-    border: 1px solid #d0d7de;
-    border-radius: 6px;
-    padding: 20px;
-    font-family: 'SFMono-Regular', 'Monaco', 'Consolas', monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #24292f;
-    overflow-x: auto;
-    white-space: pre-wrap;
-}
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-      tex2jax: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']],
-          displayMath: [['$$', '$$'], ['\\[', '\\]']],
-          processEscapes: true
-      }
-  });
-</script>
+Links:
+- [Paper](https://openreview.net/forum?id=y9LHDCKeeN)
+- [NeurIPS](https://neurips.cc/virtual/2025/loc/san-diego/poster/115179)
+- [Code](https://github.com/tsinghua-fib-lab/PIDLD)
 
 
+## 🔍 Highlights
 
-<h1>PID-controlled Langevin Dynamics for Faster Sampling of Generative Models</h1>
+![PID illustration](fig/intro_4.jpg)
 
-
-<div style="text-align:center; margin-top:12px;">
-  <span style="display:inline-block; margin:0 0 8px 0; font-size:1.5em; font-weight:600;">💐 Paper accepted at <span style="color:rgb(216,32,32);">NeurIPS 2025</span></span>
-  <p style="margin:8px 0 6px 0; font-size:1rem;">
-    Hongyi Chen<sup>1,3*</sup>,
-    Jianhai Shu<sup>2*</sup>,
-    Jingtao Ding<sup>2†</sup>,
-    Yong Li<sup>2</sup>,
-    Xiao-Ping Zhang<sup>1†</sup>
-  </p>
-  <p style="margin:6px 0 0 0; font-size:0.90rem; color: rgb(32,32,32);">
-    <sup>1</sup> Shenzhen Key Laboratory of Ubiquitous Data Enabling Laboratory, Shenzhen International Graduate School, Tsinghua University,<br>
-    <sup>2</sup> Department of Electronic Engineering, Tsinghua University,<br>
-    <sup>3</sup> Pengcheng Laboratory.
-  </p>
-</div>
-
-<div style="text-align: center; margin: 20px 0; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-  <a href="https://openreview.net/forum?id=y9LHDCKeeN" class="button-link"><img src="https://arxiv.org/favicon.ico" alt="arXiv" class="icon">Paper</a>
-  <a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/115179" class="button-link"><img src="https://neurips.cc/static/core/img/neurips-logo-new.svg" alt="NeurIPS" class="icon">NeurIPS</a>
-  <a href="https://github.com/tsinghua-fib-lab/PIDLD" class="button-link"><i class="fab fa-github" style="margin-right: 10px;"></i>Code</a>
-</div>
-
-<p>This is the official implementation of the paper "PID-controlled Langevin Dynamics for Faster Sampling of Generative Models". Each directory corresponds to a task. Please refer to the `README.md` file in each directory for more implementation details.</p>
+- **Control-theoretic insight:** Reinterprets Langevin dynamics as a feedback control system, where energy gradients act as feedback signals.  
+- **PID-enhanced sampling:** Integrates Proportional, Integral, and Derivative control terms into Langevin updates:
+  - **P-term:** basic gradient guidance;
+  - **I-term:** accumulates historical gradients for momentum-like acceleration;
+  - **D-term:** anticipates gradient trends for adaptive stabilization.
+- **Plug-and-play compatibility:** Requires no retraining or prior information; integrates with any Langevin-based sampler directly (EBM, SGM, diffusion, etc.).
+- **Significant speedup:** Achieves up to **10× faster sampling** while maintaining or improving generation quality across image and reasoning tasks.
 
 
-<div class="figure-container">
-  <img src="fig/intro_4.jpg">
-  <div class="figure-text">PID-controlled systems <strong>eliminate errors at steady-state</strong> through the integral term while <strong>dampening overshoot</strong> via the derivative term.</div>
-</div>
+## ⚙️ Algorithm Workflow
+
+The PID-controlled Langevin dynamics update is given by
+$$\begin{aligned}
+x_{t+1}=x_t+&\epsilon\Big(\\
+&k_p\nabla_{x}U_\theta(x_t)\\
++&k_i\cdot\frac{1}{t}\sum_{s=0}^{t}\nabla_{x}U_\theta(x_s)\\
++&k_d(\nabla_{x}U_\theta(x_t)-\nabla_xU_\theta(x_{t-1}))\\
+&\Big)+\sqrt{2\epsilon}\,\xi_t,\end{aligned}$$
+where $k_p,k_i,k_d$ are the proportional, integral, and derivative gains, $U_{\theta}(\cdot)$ is the energy function, $\epsilon$ is the learning rate, and $\xi_t\sim\mathcal{N}(0,I)$.
+
+**PIDLD Algorithm Flowchart**
+
+1. **Require:** Score function $\nabla_x U_\theta(x)=\nabla_x\log p_\theta(x)=\nabla_x(-f_\theta(x))$; number of steps $T$; step size $\epsilon$; control parameters $k_p,k_i,k_d$; decay rate $\gamma<1$; initial point $x_0$.
+2. Initialize integral term $I_0 = 0$.
+3. Compute initial score $s_0 = \nabla_x U_\theta(x_0)$.
+4. For $t = 0$ to $T-1$ do:
+  1. $s_t = \nabla_x U_\theta(x_t)$
+  2. $P_t = s_t$  (Proportional term)
+  3. $I_t = \dfrac{1}{t+1}\big(I_{t-1}\cdot t + s_t\big)$  (Integral term)
+  4. $D_t = s_t - s_{t-1}$  (Derivative term)
+  5. $u_t = k_p P_t + k_i I_t + k_d D_t$  (Control signal)
+  6. State update:
+      $$x_{t+1} = x_t + \epsilon \cdot u_t + \sqrt{2\epsilon}\,\xi_t,\quad \xi_t \sim \mathcal{N}(0,I)$$
+  7. Decay integral gain: $k_i = k_i \cdot \gamma$
+5. End for
+6. **Return:** $\hat{x} = x_T$
 
 
-<h2>🔍 Highlights</h2>
+## 📊 Experiments
 
-<ul>
-  <li><strong>Control-theoretic insight:</strong> Reinterprets Langevin dynamics as a <strong>feedback control system</strong>, where energy gradients act as feedback signals.</li>
-  <li><strong>PID-enhanced sampling:</strong> Integrates <em>Proportional</em>, <em>Integral</em>, and <em>Derivative</em> control terms into Langevin updates:
-    <ul>
-      <li><strong>P-term:</strong> basic gradient guidance;</li>
-      <li><strong>I-term:</strong> accumulates historical gradients for momentum-like acceleration;</li>
-      <li><strong>D-term:</strong> anticipates gradient trends for adaptive stabilization.</li>
-    </ul>
-  </li>
-  <li><strong>Plug-and-play compatibility:</strong>
-    <ul>
-      <li>Requires no retraining or prior information;
-      <li>Integrates with any Langevin-based sampler directly (EBM, SGM, diffusion, etc.).
-    </ul>
-  </li>
-  <li><strong>Significant speedup:</strong>
-    <ul>
-      <li>Achieves up to <strong>10× faster sampling</strong> while maintaining or improving generation quality across image and reasoning tasks.</li>
-    </ul>
-  </li>
-</ul>
+We evaluate PIDLD against standard Langevin-based samplers (vanilla ALD and MILD) across three regimes: toy 2‑D examples, image generation, and reasoning (solution sampling). The focus is on sampling quality versus computational budget (NFE).
+
+- Toy experiments  
+  - Purpose: validate the roles of P/I/D terms on simple multimodal landscapes.
+  - Findings: both I and D terms accelerate convergence and reduce KL/divergence; in particular, D term improves stability, and I reduces steady-state bias.
+
+- Image generation (CIFAR10, CelebA)
+  - Setup: apply PIDLD as a plug‑in to pretrained score-based models (NCSNv2) and energy models (IGEBM), vary NFE and tune PID gains (with decaying k_i); compute FID on 10k samples.  
+  - Goal: test whether PIDLD can reach baseline or better image quality at substantially lower NFEs.  
+  - Results: PIDLD consistently matches or outperforms baselines at much lower NFEs, demonstrating clear efficiency gains.
+
+- Reasoning (Sudoku, Connectivity)
+  - Setup: use an energy-based solver (IRED) and evaluate solution accuracy under different NFEs.
+  - Goal: assess whether PIDLD helps navigate complex energy landscapes to find valid solutions faster.
+  - Results: PIDLD yields higher accuracy with lower NFEs, showing overall computational advantages versus vanilla Langevin dynamics sampling.
+
+For more details, please refer to the paper and the code.
 
 
-<h2>⚙️ Algorithm Workflow</h2>
+## 📚 Citation
 
-<p>The PID-controlled Langevin dynamics update is given by:
-  <div class="math">\[
-    x_{t+1}=x_t+\epsilon\Big(k_p\nabla_{x}U_\theta(x_t)+\frac{k_i}{t}\sum_{s=0}^{t}\nabla_{x}U_\theta(x_s)+k_d(\nabla_{x}U_\theta(x_t)-\nabla_xU_\theta(x_{t-1}))\Big)+\sqrt{2\epsilon}\,\xi_t,
-  \]</div>
-  where $k_p,k_i,k_d$ are the coefficients of the proportional, integral, and derivative gains, $U_{\theta}(\cdot)$ is the energy function, and $\xi_t\sim\mathcal{N}(\mathbf{0},\mathbf{I})$.
-</p>
+If you find the idea useful for your research, please consider citing:
 
-<div class="algorithm" id="alg-PIDLD">
-  <div class="caption"><strong>PIDLD Algorithm Flowchart</strong></div>
-  <div class="line-numbered"><span class="line-number">1</span><span class="line-content"><b>Require:</b> Score function \( \nabla_x U_\theta(x)=\nabla_x\log p_\theta(x)=\nabla_x(-f_\theta(x)) \); number of steps \(T\); step size \(\epsilon\); control parameters \(k_p,k_i,k_d\); decay rate \(\gamma &lt; 1\); initial point \(x_0\).</span></div>
-  <div class="line-numbered"><span class="line-number">2</span><span class="line-content">Initialize integral term \(I_0=0\).</span></div>
-  <div class="line-numbered"><span class="line-number">3</span><span class="line-content">Compute initial score \(s_0=\nabla_x U_\theta(x_0)\).</span></div>
-  <div class="line-numbered"><span class="line-number">4</span><span class="line-content">For \(t=0\) to \(T-1\) do</span></div>
-  <div class="line-numbered"><span class="line-number">5</span><span class="line-content indent-1">\(s_t=\nabla_x U_\theta(x_t)\).</span></div>
-  <div class="line-numbered"><span class="line-number">6</span><span class="line-content indent-1">\(P_t = s_t\)  <span style="color:#666;">(Proportional term)</span></span></div>
-  <div class="line-numbered"><span class="line-number">7</span><span class="line-content indent-1">\(I_t = \frac{1}{t+1}\big(I_{t-1}\cdot t + s_t\big)\)  <span style="color:#666;">(Integral term)</span></span></div>
-  <div class="line-numbered"><span class="line-number">8</span><span class="line-content indent-1">\(D_t = s_t - s_{t-1}\)  <span style="color:#666;">(Derivative term)</span></span></div>
-  <div class="line-numbered"><span class="line-number">9</span><span class="line-content indent-1">Compute control signal: \(u_t = k_p P_t + k_i I_t + k_d D_t\).</span></div>
-  <div class="line-numbered"><span class="line-number">10</span><span class="line-content indent-1">Update state:
-    <div class="math">\[
-      x_{t+1} = x_t + \epsilon \cdot u_t + \sqrt{2\epsilon}\,\xi_t,\quad \xi_t \sim \mathcal{N}(0,I)
-    \]</div>
-  </span></div>
-  <div class="line-numbered"><span class="line-number">11</span><span class="line-content indent-1">Decay integral gain: \(k_i = k_i \cdot \gamma\).</span></div>
-  <div class="line-numbered"><span class="line-number">12</span><span class="line-content">End for</span></div>
-  <div class="line-numbered"><span class="line-number">13</span><span class="line-content"><b>Return:</b> \(\hat{x} = x_T\).</span></div>
-</div>
-
-
-<h2>📊 Experiments</h2>
-
-<p>In the experiments, we evaluated our method against standard Langevin sampling on mainstream generative models (SGM, EBM). We first used <strong>toy experiments</strong> on 2-d point datasets to validate the effectiveness of integral and derivative terms, and then used benchmark datasets in classical <strong>image generation</strong> tasks and <strong>reasoning</strong> tasks to further demonstrate the superiority of our method.</p>
-
-
-<h3>Toy Experiments</h3>
-
-<p>In the toy experiments, we sample points from a 2-d Gaussian mixture distribution using PID-controlled Langevin dynamics with different control parameters, and compare the sampling speed and quality.</p>
-
-<div class="grid-two-column">
-<div class="figure-container" style="float: left;">
-  <img src="fig/kl_ID.jpg">
-  <div class="figure-text">
-    Adding $I$ term, $D$ term, or both $I$ and $D$ terms, would significantly accelerate sampling process and produce lower KL divergence.
-  </div>
-</div>
-<div class="figure-container" style="float: right;">
-  <img src="fig/kl_D.jpg">
-  <div class="figure-text">
-    Increasing derivative term coefficient $k_d$ produces lower KL divergence.
-  </div>
-</div>
-<div class="figure-container" style="float: left;">
-  <img src="fig/kl_I.jpg">
-  <div class="figure-text">
-    Increasing integral term coefficient $k_i$ produces lower KL divergence, but excessive $k_i$ may lead to rebounding phenomenon.
-  </div>
-</div>
-<div class="figure-container" style="float: right;">
-  <img src="fig/kl_I_decay.jpg">
-  <div class="figure-text">Decaying integral term coefficient $k_i$ ensures smoother transition from early exploration to later convergence, alleviating the rebounding phenomenon.</div>
-</div>
-</div>
-
-<div class="grid-one-column">
-<div class="figure-container">
-  <img src="fig/bias_ki_kd.jpg">
-  <div class="figure-text">Effect of $k_i$ and $k_d$ on bias. Adding $I$ term (left) excels in mitigating bias.</div>
-</div>
-<div class="figure-container">
-  <img src="fig/oscillation_ki_kd.jpg">
-  <div class="figure-text">Effect of $k_i$ and $k_d$ on oscillation. Adding $D$ term (right) excels in reducing oscillation.</div>
-</div>
-</div>
-
-
-<h3>Computer Vision Tasks</h3>
-
-<p>For the computer vision task, we use score-based generative model (NCSNv2) and energy-based model (IGEBM) to sample images from CIFAR10 and CelebA datasets. Our proposed PIDLD method outperforms all the baselines across different settings.</p>
-
-<div class="grid-one-column">
-<div class="figure-container">
-  <img src="fig/cifar10_comparison.jpg">
-  <div class="figure-text">CIFAR10 samples with 25 sampling steps using score-based generative model.</div>
-</div>
-<div class="figure-container">
-  <img src="fig/celeba_comparison.jpg">
-  <div class="figure-text">CelebA samples with 25 sampling steps using score-based generative model.</div>
-</div>
-</div>
-
-<table width="100%">
-  <caption><strong>FID comparison for SGM and EBM models across different NFEs on CIFAR10 and CelebA dataset.</strong></caption>
-  <thead>
-    <tr>
-      <th rowspan="2">Dataset</th>
-      <th></th>
-      <th colspan="5" style="text-align: center;">SGM</th>
-      <th colspan="4" style="text-align: center;">EBM</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="3">CIFAR10</td>
-      <td>NFEs</td>
-      <td>25×1</td>
-      <td>100×1</td>
-      <td>232×1</td>
-      <td>232×3</td>
-      <td>232×5</td>
-      <td>10</td>
-      <td>20</td>
-      <td>30</td>
-      <td>40</td>
-    </tr>
-    <tr>
-      <td>Vanilla</td>
-      <td>46.8</td>
-      <td>17.2</td>
-      <td>16.0</td>
-      <td>12.8</td>
-      <td>12.5</td>
-      <td>135.8</td>
-      <td>58.1</td>
-      <td>40.3</td>
-      <td>35.3</td>
-    </tr>
-    <tr>
-      <td>Ours</td>
-      <td><strong>18.3</strong></td>
-      <td><strong>12.1</strong></td>
-      <td><strong>11.7</strong></td>
-      <td><strong>11.6</strong></td>
-      <td><strong>11.4</strong></td>
-      <td><strong>99.0</strong></td>
-      <td><strong>46.1</strong></td>
-      <td><strong>32.8</strong></td>
-      <td><strong>33.2</strong></td>
-    </tr>
-    <tr>
-      <td rowspan="3">CelebA</td>
-      <td>NFEs</td>
-      <td>50×1</td>
-      <td>250×1</td>
-      <td>500×1</td>
-      <td>500×3</td>
-      <td>500×5</td>
-      <td>15</td>
-      <td>20</td>
-      <td>25</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <td>Vanilla</td>
-      <td>25.0</td>
-      <td>13.6</td>
-      <td>14.0</td>
-      <td>11.3</td>
-      <td>9.5</td>
-      <td>109.1</td>
-      <td>63.5</td>
-      <td>41.3</td>
-      <td>35.4</td>
-    </tr>
-    <tr>
-      <td>Ours</td>
-      <td><strong>8.0</strong></td>
-      <td><strong>5.7</strong></td>
-      <td><strong>5.9</strong></td>
-      <td><strong>5.9</strong></td>
-      <td><strong>5.6</strong></td>
-      <td><strong>58.0</strong></td>
-      <td><strong>38.9</strong></td>
-      <td><strong>32.2</strong></td>
-      <td><strong>30.0</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="figure-container">
-  <div class="grid-one-row">
-    <div><img src="fig/ablation_cv.jpg" width="50%"></div>
-    <div class="figure-text" style="text-align: left;">Ablation study of PIDLD under image sampling tasks. P+I+D denotes the complete model, while P+I, P+D, and P represent models with the derivative term, integral term, or both terms removed, respectively. Figures on the bar indicate performance improvements of each ablation compared to P.</div>
-  </div>
-</div>
-
-
-<h3>Reasoning Tasks</h3>
-
-<p>For the reasoning task, we use energy-based model (IRED) to sample solutions for Sudoku and connectivity tasks. Our proposed PIDLD method outperforms all the baselines across different settings.</p>
-
-<table width="100%">
-  <caption><strong>Accuracy comparison for baseline and our models across Sudoku and Connectivity tasks under different NFEs.</strong></caption>
-  <thead>
-    <tr>
-      <th>Task</th>
-      <th colspan="7" style="text-align: center;">EBM Accuracy (%)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="4">Sudoku</td>
-      <td>NFEs</td>
-      <td>5</td>
-      <td>10</td>
-      <td>15</td>
-      <td>30</td>
-      <td>40</td>
-      <td>80</td>
-    </tr>
-    <tr>
-      <td>Vanilla</td>
-      <td>45.99</td>
-      <td>51.00</td>
-      <td>50.93</td>
-      <td>50.77</td>
-      <td>53.63</td>
-      <td>55.02</td>
-    </tr>
-    <tr>
-      <td>MILD</td>
-      <td>49.75</td>
-      <td>54.82</td>
-      <td>53.55</td>
-      <td>55.25</td>
-      <td>56.56</td>
-      <td>56.64</td>
-    </tr>
-    <tr>
-      <td>Ours</td>
-      <td><strong>50.54</strong></td>
-      <td><strong>55.48</strong></td>
-      <td><strong>55.55</strong></td>
-      <td><strong>55.94</strong></td>
-      <td><strong>57.02</strong></td>
-      <td><strong>56.64</strong></td>
-    </tr>
-    <tr>
-      <td rowspan="4">Connectivity</td>
-      <td>NFEs</td>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-      <td>5</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <td>Vanilla</td>
-      <td>86.16</td>
-      <td>87.22</td>
-      <td>87.22</td>
-      <td>87.48</td>
-      <td>87.38</td>
-      <td>87.49</td>
-    </tr>
-    <tr>
-      <td>MILD</td>
-      <td>86.16</td>
-      <td>88.54</td>
-      <td>89.21</td>
-      <td>89.75</td>
-      <td>90.15</td>
-      <td>90.33</td>
-    </tr>
-    <tr>
-      <td>Ours</td>
-      <td>86.16</td>
-      <td><strong>91.32</strong></td>
-      <td><strong>92.31</strong></td>
-      <td><strong>92.82</strong></td>
-      <td><strong>92.95</strong></td>
-      <td><strong>93.28</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="figure-container">
-  <div class="grid-one-row">
-    <div><img src="fig/ablation_reasoning.jpg" width="50%"></div>
-    <div class="figure-text" style="text-align: left;">Ablation study of PIDLD under reasoning tasks. P+I+D denotes the complete model, while P+I, P+D, and P represent models with the derivative term, integral term, or both terms removed, respectively. Percentages indicate performance improvements of each ablation compared to P.</div>
-  </div>
-</div>
-
-
-<h2>📚 Citation</h2>
-
-<p>If you find the idea useful for your research, please consider citing</p>
-
-<div class="citation-box">@inproceedings{chen2025pidcontrolled,
+```bibtex
+@inproceedings{chen2025pidcontrolled,
   title={{PID}-controlled Langevin Dynamics for Faster Sampling on Generative Models},
   author={Hongyi Chen and Jianhai Shu and Jingtao Ding and Yong Li and Xiao-Ping Zhang},
   booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems},
   year={2025},
   url={https://openreview.net/forum?id=y9LHDCKeeN}
 }
-</div>
+```
