@@ -14,7 +14,7 @@ This is the official implementation of the paper "PID-controlled Langevin Dynami
   - **P-term:** basic gradient guidance;
   - **I-term:** accumulates historical gradients for momentum-like acceleration;
   - **D-term:** anticipates gradient trends for adaptive stabilization.
-- **Plug-and-play compatibility:** Requires no retraining or prior information; integrates with any Langevin-based sampler directly (EBM, SGM, diffusion, etc.).
+- **Plug-and-play compatibility:** Requires no retraining or prior information; integrates with any Langevin-based sampler directly (EBM, SGM, etc.).
 - **Significant speedup:** Achieves up to **10× faster sampling** while maintaining or improving generation quality across image and reasoning tasks.
 
 
@@ -43,7 +43,7 @@ where $k_p,k_i,k_d$ are the proportional, integral, and derivative gains, $U_{\t
   4. $D_t = s_t - s_{t-1}$  (Derivative term)
   5. $u_t = k_p P_t + k_i I_t + k_d D_t$  (Control signal)
   6. State update:
-      $$x_{t+1} = x_t + \epsilon \cdot u_t + \sqrt{2\epsilon}\,\xi_t,\quad \xi_t \sim \mathcal{N}(0,I)$$
+      $$x_{t+1} = x_t + \epsilon \cdot u_t + \sqrt{2\epsilon}\xi_t,\quad \xi_t \sim \mathcal{N}(0,I)$$
   7. Decay integral gain: $k_i = k_i \cdot \gamma$
 5. End for
 6. **Return:** $\hat{x} = x_T$
@@ -53,16 +53,16 @@ where $k_p,k_i,k_d$ are the proportional, integral, and derivative gains, $U_{\t
 
 We evaluate PIDLD against standard Langevin-based samplers (vanilla ALD and MILD) across three regimes: toy 2‑D examples, image generation, and reasoning (solution sampling). The focus is on sampling quality versus computational budget (NFE).
 
-- Toy experiments  
+- **Toy experiments**
   - Purpose: validate the roles of P/I/D terms on simple multimodal landscapes.
   - Findings: both I and D terms accelerate convergence and reduce KL/divergence; in particular, D term improves stability, and I reduces steady-state bias.
 
-- Image generation (CIFAR10, CelebA)
-  - Setup: apply PIDLD as a plug‑in to pretrained score-based models (NCSNv2) and energy models (IGEBM), vary NFE and tune PID gains (with decaying k_i); compute FID on 10k samples.  
-  - Goal: test whether PIDLD can reach baseline or better image quality at substantially lower NFEs.  
+- **Image generation (CIFAR10, CelebA)**
+  - Setup: apply PIDLD as a plug‑in to pretrained score-based models (NCSNv2) and energy models (IGEBM), vary NFE and tune PID gains (with decaying k_i); compute FID on 10k samples.
+  - Goal: test whether PIDLD can reach baseline or better image quality at substantially lower NFEs.
   - Results: PIDLD consistently matches or outperforms baselines at much lower NFEs, demonstrating clear efficiency gains.
 
-- Reasoning (Sudoku, Connectivity)
+- **Reasoning (Sudoku, Connectivity)**
   - Setup: use an energy-based solver (IRED) and evaluate solution accuracy under different NFEs.
   - Goal: assess whether PIDLD helps navigate complex energy landscapes to find valid solutions faster.
   - Results: PIDLD yields higher accuracy with lower NFEs, showing overall computational advantages versus vanilla Langevin dynamics sampling.
