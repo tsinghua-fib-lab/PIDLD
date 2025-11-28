@@ -5,42 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PIDLD Website</title>
   <style>
+        /* Responsive base + box sizing */
+        *, *::before, *::after { box-sizing: border-box; }
+
         /* Basic styles */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0 auto;
-            max-width: 900px;
+            max-width: 1100px;
             padding: 20px;
             background-color: rgb(240,240,240);
             color: black;
         }
         h1 {
-            font-size: 2.5em;
+            font-size: 2.2rem;
             color: rgb(32,32,128);
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         h2 {
-            font-size: 1.8em;
+            font-size: 1.4rem;
             color: rgb(64,64,96);
-            margin-top: 40px;
-            margin-bottom: 30px;
+            margin-top: 28px;
+            margin-bottom: 18px;
             border-bottom: 2px solid rgb(64,128,216);
-            padding-bottom: 5px;
+            padding-bottom: 6px;
         }
         h3 {
-            font-size: 1.4em;
+            font-size: 1.1rem;
             color: rgb(64,64,96);
-            margin-top: 30px;
-            margin-bottom: 20px;
+            margin-top: 20px;
+            margin-bottom: 14px;
         }
         p {
-            font-size: 1.0em;
-            margin: 10px 0;
+            font-size: 1rem;
+            margin: 8px 0;
         }
-        
-        /* Grid styles */
+
+        /* Grid / layout */
         .grid-two-column {
             width: 100%;
             display: grid;
@@ -48,6 +51,7 @@
             grid-row-gap: 12px;
             grid-column-gap: 12px;
             margin: auto;
+            align-items: start;
         }
         .grid-one-column {
             width: 100%;
@@ -63,31 +67,28 @@
             align-items: center;
             gap: 12px;
         }
-        
-        /* Link styles */
+
+        /* Links / buttons */
         a {
             color: rgb(64, 128, 216);
             text-decoration: none;
         }
-        a:hover {
-            color: rgb(216, 128, 216);
-            text-decoration: none;
-        }
+        a:hover { color: rgb(216, 128, 216); }
         .button-link {
-            background-color: rgb(240,240,240);
+            background-color: transparent;
             text-decoration: none;
-            border: 1px solid black;
-            padding: 8px 16px;
-            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.8);
+            padding: 8px 14px;
+            border-radius: 18px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+            font-size: 0.95rem;
         }
-        .button-link:hover {
-            background-color: rgb(232,232,232);
-        }
-        
-        /* Image styles */
+        .button-link:hover { background-color: rgba(0,0,0,0.03); }
+
+        /* Images */
         img {
           max-width: 100%;
           height: auto;
@@ -97,74 +98,115 @@
         .icon {
             height: 20px;
             width: 20px;
-            margin-right:
-            10px;
+            margin-right: 10px;
             object-fit: contain;
+            display: inline-block;
         }
         .figure-container {
             background: rgb(255,255,255);
-            border: 1px solid black;
+            border: 1px solid rgba(0,0,0,0.8);
             margin: 10px 0;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             text-align: center;
+            width: 100%;
         }
         .figure-text {
-            font-size: 1.0em;
+            font-size: 0.98rem;
             color: black;
-            margin-top: 12px;
+            margin-top: 10px;
+            text-align: center;
         }
-        
-        /* Table styles */
+
+        /* Tables: responsive wrapper + basic style */
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 16px;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 24px;
+            margin-top: 8px;
+            min-width: 640px; /* allow horizontal scroll on small screens */
         }
         table th, table td {
-            border: 1px solid black;
+            border: 1px solid rgba(0,0,0,0.8);
             text-align: center;
+            padding: 8px;
+            vertical-align: middle;
+            font-size: 0.95rem;
         }
-        
-        /* Algorithm styles */
+
+        /* Algorithm block */
         .algorithm {
             margin-top: 1em;
-            border: 2px solid black;
+            border: 2px solid rgba(0,0,0,0.8);
             padding: 1em;
+            border-radius: 8px;
+            background: #fff;
         }
         .line-numbered {
             display: flex;
             margin-bottom: 0.5em;
+            gap: 8px;
+            flex-wrap: nowrap;
         }
         .line-number {
-            width: 3em;
+            width: 3.2em;
             text-align: right;
-            padding-right: 1em;
+            padding-right: 0.8em;
             color: gray;
+            flex: 0 0 auto;
+            font-family: monospace;
+            font-size: 0.95rem;
         }
         .line-content {
-            flex: 1;
+            flex: 1 1 auto;
+            min-width: 0; /* allow truncation/wrap inside flex */
+            font-size: 0.98rem;
         }
-        .indent-1 { margin-left: 2em; }
-        .indent-2 { margin-left: 4em; }
-        .indent-3 { margin-left: 6em; }
-        .math {
-            margin: 0.5em 0;
-        }
-        
-        /* Citation styles */
+        .indent-1 { margin-left: 1.6em; }
+        .indent-2 { margin-left: 3.2em; }
+        .indent-3 { margin-left: 4.8em; }
+        .math { margin: 0.5em 0; }
+
+        /* Citation */
         .citation-box {
             background: #f6f8fa;
             border: 1px solid #d0d7de;
             border-radius: 6px;
-            padding: 20px;
+            padding: 14px;
             font-family: 'SFMono-Regular', 'Monaco', 'Consolas', monospace;
-            font-size: 14px;
-            line-height: 1.5;
+            font-size: 0.92rem;
+            line-height: 1.45;
             color: #24292f;
             overflow-x: auto;
             white-space: pre-wrap;
+        }
+
+        /* Small screen adjustments */
+        @media (max-width: 900px) {
+            body { padding: 16px; max-width: 760px; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.2rem; }
+            .grid-two-column { grid-template-columns: 1fr; }
+            .grid-one-row { flex-direction: column; align-items: stretch; }
+            .figure-text { text-align: left; }
+            .line-numbered { flex-wrap: wrap; }
+            .line-number { width: 2.6em; padding-right: 0.6em; }
+            table { min-width: 600px; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 12px; max-width: 420px; }
+            h1 { font-size: 1.5rem; }
+            .button-link { padding: 6px 10px; font-size: 0.9rem; }
+            .line-number { display: inline-block; width: 2.2em; font-size: 0.85rem; }
+            table th, table td { padding: 6px; font-size: 0.88rem; }
+            .figure-container { padding: 10px; border-radius: 8px; }
         }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
