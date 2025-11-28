@@ -5,209 +5,205 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PIDLD Website</title>
   <style>
-        /* Responsive base + box sizing */
-        *, *::before, *::after { box-sizing: border-box; }
+    /* Responsive base + box sizing */
+    *, *::before, *::after { box-sizing: border-box; }
 
-        /* Basic styles */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0 auto;
-            max-width: 1100px;
-            padding: 20px;
-            background-color: rgb(240,240,240);
-            color: black;
-        }
-        h1 {
-            font-size: 2.2rem;
-            color: rgb(32,32,128);
-            text-align: center;
-            margin-bottom: 16px;
-        }
-        h2 {
-            font-size: 1.4rem;
-            color: rgb(64,64,96);
-            margin-top: 28px;
-            margin-bottom: 18px;
-            border-bottom: 2px solid rgb(64,128,216);
-            padding-bottom: 6px;
-        }
-        h3 {
-            font-size: 1.1rem;
-            color: rgb(64,64,96);
-            margin-top: 20px;
-            margin-bottom: 14px;
-        }
-        p {
-            font-size: 1rem;
-            margin: 8px 0;
-        }
+    /* Basic styles */
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0 auto;
+        max-width: 1100px;
+        padding: 20px;
+        background-color: rgb(240,240,240);
+        color: black;
+    }
+    h1 {
+        font-size: 2.2rem;
+        color: rgb(32,32,128);
+        text-align: center;
+        margin-bottom: 16px;
+    }
+    h2 {
+        font-size: 1.4rem;
+        color: rgb(64,64,96);
+        margin-top: 28px;
+        margin-bottom: 18px;
+        border-bottom: 2px solid rgb(64,128,216);
+        padding-bottom: 6px;
+    }
+    h3 {
+        font-size: 1.1rem;
+        color: rgb(64,64,96);
+        margin-top: 20px;
+        margin-bottom: 14px;
+    }
+    p {
+        font-size: 1rem;
+        margin: 8px 0;
+    }
 
-        /* Grid / layout */
-        .grid-two-column {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-row-gap: 12px;
-            grid-column-gap: 12px;
-            margin: auto;
-            align-items: start;
-        }
-        .grid-one-column {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-        .grid-one-row {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 12px;
-        }
+    /* Grid / layout */
+    .grid-two-column {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-row-gap: 12px;
+        grid-column-gap: 12px;
+        margin: auto;
+        align-items: start;
+    }
+    .grid-one-column {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    .grid-one-row {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
 
-        /* Links / buttons */
-        a {
-            color: rgb(64, 128, 216);
-            text-decoration: none;
-        }
-        a:hover { color: rgb(216, 128, 216); }
-        .button-link {
-            background-color: transparent;
-            text-decoration: none;
-            border: 1px solid rgba(0,0,0,0.8);
-            padding: 8px 14px;
-            border-radius: 18px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 0.95rem;
-        }
-        .button-link:hover { background-color: rgba(0,0,0,0.03); }
+    /* Links / buttons */
+    a {
+        color: rgb(64, 128, 216);
+        text-decoration: none;
+    }
+    a:hover { color: rgb(216, 128, 216); }
+    .button-link {
+        background-color: transparent;
+        text-decoration: none;
+        border: 1px solid rgba(0,0,0,0.8);
+        padding: 8px 14px;
+        border-radius: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 0.95rem;
+    }
+    .button-link:hover { background-color: rgba(0,0,0,0.03); }
 
-        /* Images */
-        img {
-          max-width: 100%;
-          height: auto;
-          display: block;
-          margin: 0 auto;
-        }
-        .icon {
-            height: 20px;
-            width: 20px;
-            margin-right: 10px;
-            object-fit: contain;
-            display: inline-block;
-        }
-        .figure-container {
-            background: rgb(255,255,255);
-            border: 1px solid rgba(0,0,0,0.8);
-            margin: 10px 0;
-            padding: 12px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            text-align: center;
-            width: 100%;
-        }
-        .figure-text {
-            font-size: 0.98rem;
-            color: black;
-            margin-top: 10px;
-            text-align: center;
-        }
+    /* Images */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .icon {
+        height: 20px;
+        width: 20px;
+        margin-right: 10px;
+        object-fit: contain;
+        display: inline-block;
+    }
+    .figure-container {
+        background: rgb(255,255,255);
+        border: 1px solid rgba(0,0,0,0.8);
+        margin: 10px 0;
+        padding: 12px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        text-align: center;
+        width: 100%;
+    }
+    .figure-text {
+        font-size: 0.98rem;
+        color: black;
+        margin-top: 10px;
+        text-align: center;
+    }
 
-        /* Tables: responsive wrapper + basic style */
-        .table-wrap {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            margin-top: 16px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 8px;
-            min-width: 640px; /* allow horizontal scroll on small screens */
-        }
-        table th, table td {
-            border: 1px solid rgba(0,0,0,0.8);
-            text-align: center;
-            padding: 8px;
-            vertical-align: middle;
-            font-size: 0.95rem;
-        }
+    /* Tables: responsive wrapper + basic style */
+    .table-wrap {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-top: 16px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+        min-width: 640px; /* allow horizontal scroll on small screens */
+    }
+    table th, table td {
+        border: 1px solid rgba(0,0,0,0.8);
+        text-align: center;
+        padding: 8px;
+        vertical-align: middle;
+        font-size: 0.95rem;
+    }
 
-        /* Algorithm block */
-        .algorithm {
-            margin-top: 1em;
-            border: 2px solid rgba(0,0,0,0.8);
-            padding: 1em;
-            border-radius: 8px;
-            background: #fff;
-        }
-        .line-numbered {
-            display: flex;
-            margin-bottom: 0.5em;
-            gap: 8px;
-            flex-wrap: nowrap;
-        }
-        .line-number {
-            width: 3.2em;
-            text-align: right;
-            padding-right: 0.8em;
-            color: gray;
-            flex: 0 0 auto;
-            font-family: monospace;
-            font-size: 0.95rem;
-        }
-        .line-content {
-            flex: 1 1 auto;
-            min-width: 0; /* allow truncation/wrap inside flex */
-            font-size: 0.98rem;
-        }
-        .indent-1 { margin-left: 1.6em; }
-        .indent-2 { margin-left: 3.2em; }
-        .indent-3 { margin-left: 4.8em; }
-        .math { margin: 0.5em 0; }
+    /* Algorithm block */
+    .algorithm {
+        margin-top: 1em;
+        border: 2px solid rgba(0,0,0,0.8);
+        padding: 1em;
+        border-radius: 8px;
+        background: #fff;
+    }
+    .line-numbered {
+        display: flex;
+        margin-bottom: 0.5em;
+        gap: 8px;
+        flex-wrap: nowrap;
+    }
+    .line-number {
+        width: 3.2em;
+        text-align: right;
+        padding-right: 0.8em;
+        color: gray;
+        flex: 0 0 auto;
+        font-family: monospace;
+        font-size: 0.95rem;
+    }
+    .line-content {
+        flex: 1 1 auto;
+        min-width: 0; /* allow truncation/wrap inside flex */
+        font-size: 0.98rem;
+    }
+    .indent-1 { margin-left: 1.6em; }
+    .indent-2 { margin-left: 3.2em; }
+    .indent-3 { margin-left: 4.8em; }
+    .math { margin: 0.5em 0; }
 
-        /* Citation */
-        .citation-box {
-            background: #f6f8fa;
-            border: 1px solid #d0d7de;
-            border-radius: 6px;
-            padding: 14px;
-            font-family: 'SFMono-Regular', 'Monaco', 'Consolas', monospace;
-            font-size: 0.92rem;
-            line-height: 1.45;
-            color: #24292f;
-            overflow-x: auto;
-            white-space: pre-wrap;
-        }
+    /* Citation */
+    .citation-box {
+        background: #f6f8fa;
+        border: 1px solid #d0d7de;
+        border-radius: 6px;
+        padding: 14px;
+        font-family: 'SFMono-Regular', 'Monaco', 'Consolas', monospace;
+        font-size: 0.92rem;
+        line-height: 1.45;
+        color: #24292f;
+        overflow-x: auto;
+        white-space: pre-wrap;
+    }
 
-        /* Small screen adjustments */
-        @media (max-width: 900px) {
-            body { padding: 16px; max-width: 760px; }
-            h1 { font-size: 1.8rem; }
-            h2 { font-size: 1.2rem; }
-            .grid-two-column { grid-template-columns: 1fr; }
-            .grid-one-row { flex-direction: column; align-items: stretch; }
-            .figure-text { text-align: left; }
-            .line-numbered { flex-wrap: wrap; }
-            .line-number { width: 2.6em; padding-right: 0.6em; }
-            table { min-width: 600px; }
-        }
+    /* Small screen adjustments */
+    @media (max-width: 900px) {
+     body { width: 720px; max-width: 720px; margin: 0 auto; overflow-x: auto; }
+   }
 
-        @media (max-width: 480px) {
-            body { padding: 12px; max-width: 420px; }
-            h1 { font-size: 1.5rem; }
-            .button-link { padding: 6px 10px; font-size: 0.9rem; }
-            .line-number { display: inline-block; width: 2.2em; font-size: 0.85rem; }
-            table th, table td { padding: 6px; font-size: 0.88rem; }
-            .figure-container { padding: 10px; border-radius: 8px; }
-        }
+    /* Small screen adjustments */
+    @media (max-width: 900px) {
+        body { padding: 16px; max-width: 760px; }
+        h1 { font-size: 1.8rem; }
+        h2 { font-size: 1.2rem; }
+        .grid-two-column { grid-template-columns: 1fr; }
+        .grid-one-row { flex-direction: column; align-items: stretch; }
+        .figure-text { text-align: left; }
+        .line-numbered { flex-wrap: wrap; }
+        .line-number { width: 2.6em; padding-right: 0.6em; }
+        table { min-width: 600px; }
+    }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/x-mathjax-config">
@@ -218,6 +214,20 @@
             processEscapes: true
         }
     });
+  </script>
+  <script>
+    (function() {
+      // simple mobile UA detection; adjust pattern if needed
+      var ua = navigator.userAgent || '';
+      var isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+      // fallback: small screen heuristic (CSS pixels)
+      var smallScreen = (window.screen && (window.screen.width <= 800 || window.innerWidth <= 800));
+      var isMobile = isMobileUA || smallScreen;
+      var meta = document.createElement('meta');
+      meta.name = 'viewport';
+      meta.content = isMobile ? 'width=720, initial-scale=1.0' : 'width=device-width, initial-scale=1.0';
+      document.getElementsByTagName('head')[0].appendChild(meta);
+    })();
   </script>
     
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.2/css/academicons.min.css">
