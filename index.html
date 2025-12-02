@@ -119,6 +119,27 @@
         text-align: center;
     }
 
+    /* Videos */
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+      margin: 16px 0;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .video-container video,
+    .video-container iframe {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
     /* Tables: responsive wrapper + basic style */
     .table-wrap {
         width: 100%;
@@ -257,7 +278,7 @@
 </div>
 
 <div style="text-align: center; margin: 20px 0; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-  <a href="https://openreview.net/forum?id=y9LHDCKeeN" class="button-link"><img src="https://arxiv.org/favicon.ico" alt="arXiv" class="icon">Paper</a>
+  <a href="https://arxiv.org/abs/2511.12603" class="button-link"><img src="https://arxiv.org/favicon.ico" alt="arXiv" class="icon">Paper</a>
   <a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/115179" class="button-link"><img src="https://neurips.cc/static/core/img/neurips-logo-new.svg" alt="NeurIPS" class="icon">NeurIPS</a>
   <a href="https://github.com/tsinghua-fib-lab/PIDLD" class="button-link"><i class="fab fa-github" style="margin-right: 10px;"></i>Code</a>
 </div>
@@ -265,6 +286,14 @@
 <div class="figure-container">
   <img src="fig/intro_4.jpg">
   <div class="figure-text">PID-controlled systems <strong>eliminate errors at steady-state</strong> through the integral term while <strong>dampening overshoot</strong> via the derivative term.</div>
+</div>
+
+
+<div class="video-container" title="2-minute presentation, 5.62MB.">
+  <video controls preload="metadata" playsinline>
+      <source src="fig/PIDLD_slide_presentation.mp4" type="video/mp4">
+      Your browser does not support the video tag. <a href="fig/PIDLD_slide_presentation.mp4">Download</a>
+  </video>
 </div>
 
 

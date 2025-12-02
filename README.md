@@ -2,7 +2,7 @@
 
 This is the official implementation of the paper "PID-controlled Langevin Dynamics for Faster Sampling of Generative Models". Each directory corresponds to a task. Please refer to the `README.md` file in each directory for more implementation details.
 
-[Paper](https://openreview.net/forum?id=y9LHDCKeeN) · [NeurIPS](https://neurips.cc/virtual/2025/loc/san-diego/poster/115179) · [Code](https://github.com/tsinghua-fib-lab/PIDLD) · [WebPage](https://tsinghua-fib-lab.github.io/PIDLD/)
+[Paper](https://arxiv.org/abs/2511.12603) · [NeurIPS](https://neurips.cc/virtual/2025/loc/san-diego/poster/115179) · [Code](https://github.com/tsinghua-fib-lab/PIDLD) · [WebPage](https://tsinghua-fib-lab.github.io/PIDLD/)
 
 
 ## 🔍 Highlights
